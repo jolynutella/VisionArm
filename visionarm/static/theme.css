@@ -16,3 +16,12 @@ body {
 .theme-showcase .navbar .container {
   width: auto;
 }
+
+.danger {
+  background-color: #C24641;
+  word-wrap: break-word
+}
+
+.succsess {
+  background-color: #90EE90;
+}

@@ -12,6 +12,8 @@
     <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
     
     <link href="{{ url_for('static', filename='theme.css') }}" rel="stylesheet">
+
+
   </head>
 
   <body>
@@ -45,6 +47,18 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+
+          {% for category, message in messages %}
+            <div class="{{ category }}">{{ message }}</div>
+          {% endfor %}
+
+        {% endif %}
+      {% endwith %}
+    </div>
 
     <div class="container theme-showcase" role="main">
 
