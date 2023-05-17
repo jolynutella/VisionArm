@@ -18,10 +18,9 @@ body {
 }
 
 .danger {
-  background-color: #C24641;
-  word-wrap: break-word
+  background-color: #f24d47;
 }
 
-.succsess {
-  background-color: #90EE90;
+.success {
+  background-color: #228525;
 }

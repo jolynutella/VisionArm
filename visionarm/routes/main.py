@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import current_user, login_required
 
 from visionarm.extentions import db
@@ -114,3 +114,30 @@ def promote(user_id):
     db.session.commit()
 
     return redirect(url_for('main.users'))
+
+@main.route('/edit', methods=['GET', 'POST'])
+@login_required
+def edit():
+    
+    if request.method == 'POST':
+        new_login = request.form['new_login']
+        existing_user = User.query.filter_by(login=new_login).first()
+        error_message = ''
+
+        if existing_user is not None and existing_user != current_user:
+            error_message = 'Login already exists.'
+            flash(error_message, 'danger')
+            return redirect(url_for('main.edit'))
+
+        current_user.login = new_login
+        current_user.unhashed_password = request.form['new_unhashed_password']
+        current_user.name = request.form['new_name']
+        current_user.surname = request.form['new_surname']
+
+        db.session.commit()
+        edit_message = 'Account successfully updated!'
+        flash(edit_message, 'success')
+        return redirect(url_for('main.edit'))
+
+    return render_template('edit.html')
+

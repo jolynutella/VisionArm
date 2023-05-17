@@ -5,10 +5,10 @@ from .extentions import db
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    login = db.Column(db.String(50))
-    password = db.Column(db.String(100))
-    name = db.Column(db.String(50))
-    surname = db.Column(db.String(50))
+    login = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    surname = db.Column(db.String(50), nullable=False)
     expert = db.Column(db.Boolean)
     admin = db.Column(db.Boolean)
 
@@ -38,7 +38,7 @@ class User(db.Model, UserMixin):
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.Text)
-    answer = db.Column(db.Text)
+    question = db.Column(db.Text, nullable=False)
+    answer = db.Column(db.Text, nullable=False)
     asked_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))

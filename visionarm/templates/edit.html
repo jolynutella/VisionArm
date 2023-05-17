@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Account{% endblock %}
+
+{% block content %}
+<div class="page-header">
+        <h1>Hello, {{ current_user.login }}!</h1>
+        <h1>Here you can update your account info.</h1>
+      </div>
+                <h4>Login: {{current_user.login}}</h4>
+                <h4>Name: {{current_user.name}}</h4>
+                <h4>Surname: {{current_user.surname}}</h4>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <form class="form-horizontal" method="POST" action="{{ url_for('main.edit') }}">
+                <fieldset>
+                  <div class="form-group">
+                    <label for="inputLogin" class="col-lg-2 control-label">New Login</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="new_login" id="inputLogin">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">New Password</label>
+                    <div class="col-lg-10">
+                      <input type="password" class="form-control" name="new_unhashed_password" id="inputPassword">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-lg-2 control-label">New Name</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="new_name" id="inputName">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSurname" class="col-lg-2 control-label">New Surname</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="new_surname" id="inputSurname">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                      <button type="submit" class="btn btn-danger">Delete Account</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+{% endblock %}
