@@ -141,3 +141,20 @@ def edit():
 
     return render_template('edit.html')
 
+
+@main.route('/delete/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def delete(user_id):
+
+    user_to_delete = User.query.get_or_404(user_id)
+
+    try:
+        db.session.delete(user_to_delete)
+        db.session.commit()
+        flash('Account deleted successfully!', 'success')
+        return redirect(url_for('auth.register'))
+    except:
+        flash('Error deleting account!', 'danger')
+        return redirect(url_for('main.edit'))
+
+

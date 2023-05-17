@@ -28,6 +28,7 @@ def register():
             user = User(login=login, unhashed_password=unhashed_password, name=name, surname=surname, admin=False, expert=False)
             db.session.add(user)
             db.session.commit()
+            flash('Account created successfully!', 'success')
             return redirect(url_for('auth.login'))
         
     return render_template('register.html')

@@ -10,6 +10,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     
     <link href="{{ url_for('static', filename='theme.css') }}" rel="stylesheet">
 
@@ -49,7 +50,13 @@
       </div>
     </nav>
 
-    <div class="container">
+    <script>
+      setTimeout(function() {
+    $('#flash_message').fadeOut('slow');
+    }, 5000); // <-- time in milliseconds
+    </script>
+
+    <div id="flash_message" class="container">
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
 

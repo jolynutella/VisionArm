@@ -41,11 +41,14 @@
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                       <button type="submit" class="btn btn-primary">Update</button>
-                      <button type="submit" class="btn btn-danger">Delete Account</button>
+                      <p></p>
                     </div>
                   </div>
                 </fieldset>
               </form>
             </div>
+            <form action="{{ url_for('main.delete', user_id=current_user.id) }}" method="POST">
+              <button type="submit" class="btn btn-danger">Delete Account</button>
+            </form>
           </div>
 {% endblock %}
