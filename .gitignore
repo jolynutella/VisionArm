@@ -1,1 +1,5 @@
 instance/
+coverage_re/
+.pytest_cache/
+tests/__pycache__
+.coverage
