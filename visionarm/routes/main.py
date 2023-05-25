@@ -101,7 +101,7 @@ def users():
     }
     return render_template('users.html', **context)
 
-@main.route('/promote/<int:user_id>')
+@main.route('/promote/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def promote(user_id):
 
@@ -124,7 +124,7 @@ def edit():
         existing_user = User.query.filter_by(login=new_login).first()
         error_message = ''
 
-        if existing_user is not None and existing_user != current_user:
+        if existing_user is not None:
             error_message = 'Login already exists.'
             flash(error_message, 'danger')
             return redirect(url_for('main.edit'))
@@ -146,15 +146,16 @@ def edit():
 @login_required
 def delete(user_id):
 
-    user_to_delete = User.query.get_or_404(user_id)
+    user_to_delete = User.query.get(user_id)
 
     try:
         db.session.delete(user_to_delete)
         db.session.commit()
         flash('Account deleted successfully!', 'success')
         return redirect(url_for('auth.register'))
-    except:
-        flash('Error deleting account!', 'danger')
+    
+    except Exception as e:
+        flash(f'Error deleting account: {str(e)}', 'danger')
         return redirect(url_for('main.edit'))
 
 

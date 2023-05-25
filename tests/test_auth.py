@@ -1,4 +1,5 @@
 from visionarm.models import User
+from visionarm.extentions import db
 
 def test_register_title(client):
     response = client.get("/register")
@@ -31,6 +32,14 @@ def test_failed_registration(client, app):
         assert user is None
 
 
+def test_user_already_exists(client):
+    response_1 = client.post('/register', data=dict(login='test_user', password='test_password', name='John', surname='Doe'))
+    response_2 = client.post('/register', data=dict(login='test_user', password='test_password', name='John', surname='Doe'))
+    
+    assert response_2.status_code == 302
+        
+    assert response_2.location == '/register'
+      
 def test_valid_login(client):
     client.post('/register', data=dict(login='test_user', password='test_password', name='John', surname='Doe'))
     client.post('/login', data=dict(login='test_user', password='test_password', name='John', surname='Doe'))

@@ -14,6 +14,9 @@ def register():
         unhashed_password = request.form['password']
         name = request.form['name']
         surname = request.form['surname']
+        admin = bool(request.form.get('admin', False))
+        expert = bool(request.form.get('expert', False))
+
 
         existing_user = User.query.filter_by(login=login).first()
 
@@ -25,7 +28,7 @@ def register():
             return redirect(url_for('auth.register'))
         
         if not error_message:
-            user = User(login=login, unhashed_password=unhashed_password, name=name, surname=surname, admin=False, expert=False)
+            user = User(login=login, unhashed_password=unhashed_password, name=name, surname=surname, admin=admin, expert=expert)
             db.session.add(user)
             db.session.commit()
             flash('Account created successfully!', 'success')
