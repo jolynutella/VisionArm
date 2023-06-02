@@ -35,6 +35,7 @@
             {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('main.ask') }}">Ask Question</a></li>
             <li><a href="{{ url_for('main.edit') }}">Account</a></li>
+            <li><a href="{{ url_for('main.manipulator') }}">Manipulator</a></li>
             {% endif %}
             {% if current_user.is_authenticated and current_user.expert %}
             <li><a href="{{ url_for('main.unanswered') }}">Unanswered Questions</a></li>
